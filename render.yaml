@@ -13,8 +13,11 @@ services:
   - type: web
     name: instant-mechanic-api
     runtime: docker
-    rootDir: backend
-    dockerfilePath: ./Dockerfile
+    # Both paths resolve from the repo root, not from any rootDir, so
+    # they are spelled out in full. dockerContext is backend/ so the
+    # Dockerfile's own COPY paths stay relative to the app.
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
     plan: free
     healthCheckPath: /health
     envVars:
